@@ -4,7 +4,10 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 export default component$(() => {
   return (
     <>
-      <h1>Hi 👋</h1>
+      <div class="flex  justify-center">
+        <h1 class="text-4xl">Emojis 😃</h1>
+      </div>
+
       <p>
         Can't wait to see what you build with qwik!
         <br />
@@ -15,7 +18,7 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: "Welcome to Qwik",
+  title: "Emojis 😃",
   meta: [
     {
       name: "description",
