@@ -11,7 +11,6 @@
   "scripts": {
     "build": "qwik build",
     "build.client": "vite build",
-    "build.full": "npm run build && npm run build.server",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
     "build.server": "vite build -c adapters/static/vite.config.ts",
     "build.ssg": "vite build --ssr src/entry.static.tsx",
