@@ -13,6 +13,7 @@
     "build.client": "vite build",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
     "build.types": "tsc --incremental --noEmit",
+    "build.ssg": "vite build --ssr src/entry.static.tsx",
     "build.full": "npm run build && npm run build.ssg && npm run ssg",
     "deploy": "echo 'Run \"npm run qwik add\" to install a server adapter'",
     "dev": "vite --mode ssr",
