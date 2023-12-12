@@ -1,7 +1,6 @@
-import { component$, useSignal, useTask$ } from "@builder.io/qwik";
+import { component$, useSignal } from "@builder.io/qwik";
 import Emoji from "../components/emoji";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { writeFileSync } from "fs";
 
 export default component$(() => {
   // f08a4b atomic tangerine
@@ -9,21 +8,8 @@ export default component$(() => {
 
   const emojis = useSignal<EmojiValues[]>();
 
-  //rewrite this to fetch from a local file
-  //rewirte api fetch in a script
-  useTask$(async () => {
-    const url = "https://emoji-api.com/emojis?access_key={retracted}";
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      writeFileSync("./emojis.json", JSON.stringify(data, null, 2));
-      emojis.value = data;
-      console.log(data);
-      console.log(emojis.value);
-    } catch (e) {
-      emojis.value = [];
-    }
-  });
+  // rewrite this to fetch from a local file
+  // rewrite api fetch in a script
 
   /*
   how to center emojis
@@ -53,7 +39,7 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: "Emojis 😃",
+  title: "Emojis",
   meta: [
     {
       name: "description",
