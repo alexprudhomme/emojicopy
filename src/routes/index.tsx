@@ -35,17 +35,12 @@ export default component$(() => {
       <div class="w-full bg-neon-carrot rounded-b-md">
         <div class="flex justify-center items-center">
           <h1 class="text-4xl mt-4 mb-4">Emojis 😃</h1>
-          <div>
-            highilited buttons where you can scroll and they get highlted
-          </div>
         </div>
       </div>
       <div class="flex justify-center">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 ">
           {emojis.value?.map(({ character, slug }) => (
-            <div key={slug} class="flex justify-center items-center">
-              <Emoji character={character} />
-            </div>
+            <Emoji key={slug} character={character} />
           ))}
         </div>
       </div>
@@ -54,7 +49,7 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: "Emojis",
+  title: "Emojis Copy",
   meta: [
     {
       name: "description",
