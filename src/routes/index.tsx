@@ -1,13 +1,28 @@
-import { component$, useSignal } from "@builder.io/qwik";
+import { component$, useSignal, useTask$ } from "@builder.io/qwik";
 import Emoji from "../components/emoji";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import emojisData from "../../data/emojis.json";
+interface EmojiValues {
+  slug: string;
+  character: string;
+  unicodeName: string;
+  codePoint: string;
+  group: string;
+  subGroup: string;
+  variants?: Array<EmojiVariant>;
+}
+
+interface EmojiVariant {
+  slug: string;
+  character: string;
+}
 
 export default component$(() => {
-  // f08a4b atomic tangerine
-  // d78a76 coral pink
-
   const emojis = useSignal<EmojiValues[]>();
 
+  useTask$(() => {
+    emojis.value = emojisData;
+  });
   // rewrite this to fetch from a local file
   // rewrite api fetch in a script
 
@@ -17,7 +32,7 @@ export default component$(() => {
   */
   return (
     <>
-      <div class="w-full bg-[#f2a541] rounded-b-md">
+      <div class="w-full bg-neon-carrot rounded-b-md">
         <div class="flex justify-center items-center">
           <h1 class="text-4xl mt-4 mb-4">Emojis 😃</h1>
           <div>
@@ -47,13 +62,3 @@ export const head: DocumentHead = {
     },
   ],
 };
-
-interface EmojiValues {
-  slug: string;
-  character: string;
-  unicodeName: string;
-  codePoint: string;
-  group: string;
-  subGroup: string;
-  variants?: Array<string>;
-}
