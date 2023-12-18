@@ -10,34 +10,32 @@ import emojisData from "../../data/emojis.json";
 import { findTitle } from "~/utils/findTitle";
 import { EmojiBody } from "~/components/emojiGroup";
 import { MagnifyingGlassIcon } from "~/components/icons/magnifyingGlassIcon";
-interface EmojiValues {
-  slug: string;
-  character: string;
-  unicodeName: string;
-  codePoint: string;
-  group: string;
-  subGroup: string;
-  variants?: Array<EmojiVariant>;
-}
-export interface EmojiGroup {
-  group: string;
-  title: string;
-  emojis: EmojiValues[];
-}
+import type { EmojiState } from "~/interfaces/emoji";
 
-interface EmojiVariant {
-  slug: string;
-  character: string;
+function searchForQuery(emojis: EmojiState, query: string) {
+  const searchedEmojis: EmojiState = {};
+  const emojiValues = Object.values(emojis);
+  emojiValues.forEach((emojiGroup) => {
+    const emojis = emojiGroup.emojis.filter((emoji) => {
+      return emoji.unicodeName.includes(query);
+    });
+    if (emojis.length > 0) {
+      searchedEmojis[emojiGroup.group] = {
+        ...emojiGroup,
+        emojis,
+      };
+    }
+  });
+  return searchedEmojis;
 }
 
 export default component$(() => {
-  const originalEmojis = useSignal<{ [key: string]: EmojiGroup }>();
-  const emojis = useSignal<{ [key: string]: EmojiGroup }>();
-
+  const originalEmojis = useSignal<EmojiState>();
+  const emojis = useSignal<EmojiState>();
   const query = useSignal<string>("");
 
   useTask$(() => {
-    const emojiGroupedMap: { [key: string]: EmojiGroup } = {};
+    const emojiGroupedMap: EmojiState = {};
 
     emojisData.forEach((emoji) => {
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -88,6 +86,7 @@ export default component$(() => {
             <div
               key={key}
               class="text-xs m-0.5 p-0.5 rounded-md shadow-lg bg-atomic-tangerine"
+              onClick$={() => document.getElementById(key)?.scrollIntoView()}
             >
               {findTitle(key)}
             </div>
@@ -110,20 +109,3 @@ export const head: DocumentHead = {
     },
   ],
 };
-
-function searchForQuery(emojis: { [key: string]: EmojiGroup }, query: string) {
-  const searchedEmojis: { [key: string]: EmojiGroup } = {};
-  const emojiValues = Object.values(emojis);
-  emojiValues.forEach((emojiGroup) => {
-    const emojis = emojiGroup.emojis.filter((emoji) => {
-      return emoji.unicodeName.includes(query);
-    });
-    if (emojis.length > 0) {
-      searchedEmojis[emojiGroup.group] = {
-        ...emojiGroup,
-        emojis,
-      };
-    }
-  });
-  return searchedEmojis;
-}

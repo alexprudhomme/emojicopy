@@ -8,6 +8,12 @@
 
 ---
 
+# TODO
+
+- [] Add jsdoc to scripts
+- [] do the usetask stuff in index in the script instead and combine the scripts
+- [] do the findTitle in the script also
+
 ## Project Structure
 
 This project is using Qwik with [QwikCity](https://qwik.builder.io/qwikcity/overview/). QwikCity is just an extra set of tools on top of Qwik to make it easier to build a full site, including directory-based routing, layouts, and more.

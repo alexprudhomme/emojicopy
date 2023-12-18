@@ -1,29 +1,25 @@
 import { component$ } from "@builder.io/qwik";
-import type { EmojiGroup } from "~/routes";
 import { Emoji } from "./emoji";
+import type { EmojiState } from "~/interfaces/emoji";
 
-export const EmojiBody = component$(
-  (props: { emojis: { [key: string]: EmojiGroup } }) => {
-    return (
-      <div class="column">
-        {Object.entries(props.emojis).map(([group, emojisInGroup]) => (
-          <div key={group}>
-            <h1 class="text-center">{getTitle(group)}</h1>
-            <div
-              class="display: flex;
-  flex-wrap: wrap;
-  justify-content: center;"
-            >
-              {emojisInGroup.emojis.map(({ character, slug }) => (
-                <Emoji key={slug} character={character} />
-              ))}
-            </div>
+export const EmojiBody = component$((props: { emojis: EmojiState }) => {
+  return (
+    <div class="column">
+      {Object.entries(props.emojis).map(([group, emojisInGroup]) => (
+        <div key={group}>
+          <h1 class="text-center" id={group}>
+            {getTitle(group)}
+          </h1>
+          <div class="flex flex-wrap justify-start gap-3 max-w-screen-lg">
+            {emojisInGroup.emojis.map(({ character, slug }) => (
+              <Emoji key={slug} character={character} />
+            ))}
           </div>
-        ))}
-      </div>
-    );
-  }
-);
+        </div>
+      ))}
+    </div>
+  );
+});
 
 function getTitle(group: string) {
   switch (group) {
