@@ -1,15 +1,19 @@
 import { component$ } from "@builder.io/qwik";
 import type { EmojiGroup } from "~/routes";
-import Emoji from "./emoji";
+import { Emoji } from "./emoji";
 
-export default component$(
+export const EmojiBody = component$(
   (props: { emojis: { [key: string]: EmojiGroup } }) => {
     return (
       <div class="column">
         {Object.entries(props.emojis).map(([group, emojisInGroup]) => (
           <div key={group}>
             <h1 class="text-center">{getTitle(group)}</h1>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 ">
+            <div
+              class="display: flex;
+  flex-wrap: wrap;
+  justify-content: center;"
+            >
               {emojisInGroup.emojis.map(({ character, slug }) => (
                 <Emoji key={slug} character={character} />
               ))}

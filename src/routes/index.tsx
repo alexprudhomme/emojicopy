@@ -7,7 +7,9 @@ import {
 } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import emojisData from "../../data/emojis.json";
-import EmojiGroup from "~/components/emojiGroup";
+import { findTitle } from "~/utils/findTitle";
+import { EmojiBody } from "~/components/emojiGroup";
+import { MagnifyingGlassIcon } from "~/components/icons/magnifyingGlassIcon";
 interface EmojiValues {
   slug: string;
   character: string;
@@ -66,26 +68,34 @@ export default component$(() => {
     });
   });
 
-  const setQuery = $((e: any) => {
-    query.value = e.target.value;
-  });
-
   return (
     <>
       <div class="w-full bg-neon-carrot rounded-b-md flex">
         <div class="grow w-20 flex justify-center items-center">
-          <input onInput$={setQuery} placeholder="Search"></input>
+          <div class="p-2 bg-atomic-tangerine h-8 rounded-md flex justify-center items-center shadow-lg h-10">
+            <MagnifyingGlassIcon></MagnifyingGlassIcon>
+            <input
+              class="bg-transparent outline-none ml-2"
+              bind:value={query}
+            ></input>
+          </div>
         </div>
         <div class="grow-0 ">
           <h1 class="text-4xl mt-4 mb-4">Emojis 😃</h1>
         </div>
         <div class="grow w-20 flex justify-center items-center">
-          <div>01 {query}</div>
-          <div>02</div>
+          {Object.keys(emojis.value ?? {}).map((key) => (
+            <div
+              key={key}
+              class="text-xs m-0.5 p-0.5 rounded-md shadow-lg bg-atomic-tangerine"
+            >
+              {findTitle(key)}
+            </div>
+          ))}
         </div>
       </div>
       <div class="flex justify-center items-center">
-        <EmojiGroup emojis={emojis.value ?? {}}></EmojiGroup>
+        <EmojiBody emojis={emojis.value ?? {}}></EmojiBody>
       </div>
     </>
   );

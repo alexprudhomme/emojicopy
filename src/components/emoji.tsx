@@ -1,7 +1,7 @@
 import { component$, useSignal, $ } from "@builder.io/qwik";
-import CopyIcon from "./copy-icon";
+import { CopyIcon } from "./icons/copyIcon";
 
-export default component$((props: { character: string }) => {
+export const Emoji = component$((props: { character: string }) => {
   const copyEmoji = $(() => {
     navigator.clipboard.writeText(props.character);
   });
