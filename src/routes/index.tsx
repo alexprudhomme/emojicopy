@@ -7,7 +7,7 @@ import {
 } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import emojisData from "../../data/emojis.json";
-import { EmojiBody } from "~/components/emojiGroup";
+import { EmojiBody } from "~/components/emoji-group";
 import type { EmojiState } from "~/interfaces/emoji";
 import { Header } from "~/components/header";
 

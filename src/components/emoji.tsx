@@ -1,5 +1,5 @@
 import { component$, useSignal, $ } from "@builder.io/qwik";
-import { CopyIcon } from "./icons/copyIcon";
+import { CopyIcon } from "./icons/copy-icon";
 
 export const Emoji = component$((props: { character: string }) => {
   const copyEmoji = $(() => {

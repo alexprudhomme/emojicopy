@@ -1,12 +1,19 @@
-import { $, component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
+import { $, component$ } from "@builder.io/qwik";
 import type { Signal } from "@builder.io/qwik";
-import { MagnifyingGlassIcon } from "./icons/magnifyingGlassIcon";
-import { findTitle } from "~/utils/findTitle";
+import { MagnifyingGlassIcon } from "./icons/magnifying-glass-icon";
 import type { EmojiState } from "~/interfaces/emoji";
+import { SmileIcon } from "./icons/smile-icon";
+import { HandIcon } from "./icons/hand-icon";
+import { FrogIcon } from "./icons/frog-icon";
+import { IceCreamIcon } from "./icons/ice-cream-icon";
+import { PlaneIcon } from "./icons/plane-icon";
+import { FutbolIcon } from "./icons/futbol-icon";
+import { SymbolIcon } from "./icons/symbol-icon";
+import { FlagIcon } from "./icons/flag-icon";
+import { CrownIcon } from "./icons/crown-icon";
 
 export const Header = component$(
   (props: { query: Signal<string>; emojis: EmojiState }) => {
-    const keyboardShortcut = useSignal<string>("⌘ K");
     const setQuery = $((e: any) => {
       console.log(props.query);
       props.query.value = e.target.value;
@@ -36,17 +43,44 @@ export const Header = component$(
           <h1 class="text-4xl mt-4 mb-4">Emojis 😃</h1>
         </div>
         <div class="grow w-20 flex flex-wrap m-2 justify-center items-center">
-          {Object.keys(props.emojis).map((key) => (
-            <div
-              key={key}
-              class="text-xs m-0.5 p-0.5 cursor-pointer hover:bg-sky-300 rounded-md shadow-lg bg-atomic-tangerine"
-              onClick$={() => moveToGroup(key)}
-            >
-              {findTitle(key)}
-            </div>
-          ))}
+          <div class="flex justify-between w-3/6">
+            {Object.keys(props.emojis).map((key) => (
+              <div
+                key={key}
+                class="m-0.5 p-0.5 cursor-pointer hover:bg-sky-300 rounded-md shadow-lg bg-atomic-tangerine"
+                onClick$={() => moveToGroup(key)}
+              >
+                {findIconFromGroup(key)}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
   }
 );
+
+export const findIconFromGroup = (group: string) => {
+  switch (group) {
+    case "smileys-emotion":
+      return <SmileIcon></SmileIcon>;
+    case "people-body":
+      return <HandIcon></HandIcon>;
+    case "animals-nature":
+      return <FrogIcon></FrogIcon>;
+    case "food-drink":
+      return <IceCreamIcon></IceCreamIcon>;
+    case "travel-places":
+      return <PlaneIcon></PlaneIcon>;
+    case "activities":
+      return <FutbolIcon></FutbolIcon>;
+    case "objects":
+      return <CrownIcon></CrownIcon>;
+    case "symbols":
+      return <SymbolIcon></SymbolIcon>;
+    case "flags":
+      return <FlagIcon></FlagIcon>;
+    default:
+      return "Other";
+  }
+};
