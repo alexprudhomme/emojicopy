@@ -29,9 +29,12 @@ export const Header = component$(
     });
 
     return (
-      <div class="w-full bg-neon-carrot rounded-b-md flex sticky top-0 z-10">
+      <div
+        class="w-full rounded-b-md flex sticky top-0 z-10 border-2 border-[#85B7FF]"
+        style="background-color: hsl(215, 100%, 76%, 0.3);"
+      >
         <div class="grow w-20 flex justify-center items-center">
-          <div class="p-2 bg-atomic-tangerine h-8 rounded-md flex justify-center items-center shadow-lg h-10">
+          <div class="p-2 bg-white border-2 border-[#85B7FF] h-8 rounded-md flex justify-center items-center h-10 drop-shadow-2xl white-container">
             <MagnifyingGlassIcon></MagnifyingGlassIcon>
             <input
               class="bg-transparent outline-none ml-2"
@@ -40,14 +43,14 @@ export const Header = component$(
           </div>
         </div>
         <div class="grow-0 ">
-          <h1 class="text-4xl mt-4 mb-4">Emojis 😃</h1>
+          <h1 class="text-4xl mt-4 mb-4 text-[#A33077]">Emojis 🦆</h1>
         </div>
-        <div class="grow w-20 flex flex-wrap m-2 justify-center items-center">
+        <div class="grow w-20 flex flex-wrap justify-center items-center">
           <div class="flex justify-between w-3/6">
             {Object.keys(props.emojis).map((key) => (
               <div
                 key={key}
-                class="m-0.5 p-0.5 cursor-pointer hover:bg-sky-300 rounded-md shadow-lg bg-atomic-tangerine"
+                class="m-0.5 p-0.5 cursor-pointer rounded-md shadow-lg border-2 border-[#85B7FF] drop-shadow-2xl white-container"
                 onClick$={() => moveToGroup(key)}
               >
                 {findIconFromGroup(key)}

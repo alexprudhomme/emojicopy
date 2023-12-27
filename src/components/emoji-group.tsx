@@ -4,14 +4,14 @@ import type { EmojiState } from "~/interfaces/emoji";
 
 export const EmojiBody = component$((props: { emojis: EmojiState }) => {
   return (
-    <div class="flex justify-center items-center">
-      <div class="column">
+    <div class="flex justify-center items-center ">
+      <div class="flex flex-col items-center max-w-screen-lg">
         {Object.entries(props.emojis).map(([group, emojisInGroup]) => (
           <div key={group}>
-            <h1 class="text-center" id={group}>
+            <h1 class="text-lg text-[#A33077]" id={group}>
               {getTitle(group)}
             </h1>
-            <div class="flex flex-wrap justify-start gap-3 max-w-screen-lg">
+            <div class="flex flex-wrap justify-start gap-3 ">
               {emojisInGroup.emojis.map(({ character, slug }) => (
                 <Emoji key={slug} character={character} />
               ))}

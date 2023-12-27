@@ -32,6 +32,24 @@ body {
   line-height: inherit;
 }
 
+.emoji {
+  background-color: hsla(215, 100%, 76%, 0.7);
+  transition: background-color 0.3s ease;
+}
+
+.emoji:hover {
+  background-color: #85b7ff;
+}
+
+.white-container {
+  background-color: #fef2f2;
+  transition: background-color 0.3s ease;
+}
+
+.white-container:hover {
+  background-color: #85b7ff;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
